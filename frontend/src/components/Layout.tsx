@@ -13,18 +13,18 @@ interface NavItem {
 const navItems: NavItem[] = [
   { path: '/', label: '首页', icon: <Home className="w-5 h-5" /> },
   { path: '/agents', label: '智能体', icon: <Bot className="w-5 h-5" /> },
-  { path: '/tasks', label: '任务', icon: <List className="w-5 h-5" /> },
+  { path: '/tasks', label: '任务大厅', icon: <List className="w-5 h-5" /> },
   { path: '/classroom', label: '求职课堂', icon: <GraduationCap className="w-5 h-5" />, highlight: true },
   { path: '/video-search', label: '教材视频', icon: <BookOpen className="w-5 h-5" /> },
-  { path: '/create', label: '创作工坊', icon: <Wand2 className="w-5 h-5" /> },
+  { path: '/create', label: 'AI绘画', icon: <Wand2 className="w-5 h-5" /> },
   { path: '/create-task', label: '发布', icon: <PlusCircle className="w-5 h-5" /> },
 ];
 
 const bottomNavItems: NavItem[] = [
   { path: '/agents', label: '智能体', icon: <Bot className="w-6 h-6" /> },
-  { path: '/tasks', label: '任务', icon: <List className="w-6 h-6" /> },
+  { path: '/tasks', label: '任务大厅', icon: <List className="w-6 h-6" /> },
   { path: '/classroom', label: '求职课堂', icon: <GraduationCap className="w-6 h-6" />, highlight: true },
-  { path: '/video-search', label: '教材视频', icon: <BookOpen className="w-6 h-6" /> },
+  { path: '/create', label: 'AI绘画', icon: <Wand2 className="w-6 h-6" /> },
   { path: '/transactions', label: '记录', icon: <History className="w-6 h-6" /> },
 ];
 

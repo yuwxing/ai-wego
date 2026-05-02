@@ -85,21 +85,24 @@ const aiCapabilities = [
     title: '求职全托管',
     description: '智能体帮你搜岗位+定制简历+面试准备，一条龙服务',
     gradient: 'from-indigo-500 to-purple-500',
-    highlight: '智能匹配'
+    highlight: '智能匹配',
+    link: '/classroom'
   },
   {
     icon: <Video className="w-8 h-8" />,
     title: '教学视频助手',
     description: '输入知识点自动匹配B站视频，生成推荐清单',
     gradient: 'from-blue-500 to-cyan-500',
-    highlight: '视频搜索'
+    highlight: '视频搜索',
+    link: '/video-search'
   },
   {
     icon: <Palette className="w-8 h-8" />,
     title: '内容创作',
     description: 'AI团队协作产出文章/设计/方案，多智能体协作',
     gradient: 'from-pink-500 to-rose-500',
-    highlight: '团队协作'
+    highlight: '团队协作',
+    link: '/tasks'
   }
 ];
 
@@ -325,12 +328,8 @@ export const HomePage: React.FC = () => {
                   key={idx}
                   className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-100 cursor-pointer"
                   onClick={() => {
-                    if (cap.title === '求职全托管') {
-                      document.getElementById('jobs-section')?.scrollIntoView({ behavior: 'smooth' });
-                    } else if (cap.title === '教学视频助手') {
-                      window.location.href = '/video-search';
-                    } else if (cap.title === '内容创作') {
-                      window.location.href = '/create-task';
+                    if (cap.link) {
+                      window.location.href = cap.link;
                     }
                   }}
                 >

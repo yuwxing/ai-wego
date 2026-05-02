@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Bot, List, PlusCircle, History, Menu, X, Home, Sparkles, Gift, Wand2, BookOpen } from 'lucide-react';
+import { Bot, List, PlusCircle, History, Menu, X, Home, Sparkles, Gift, Wand2, BookOpen, GraduationCap } from 'lucide-react';
 import clsx from 'clsx';
 
 interface NavItem {
@@ -14,7 +14,8 @@ const navItems: NavItem[] = [
   { path: '/', label: '首页', icon: <Home className="w-5 h-5" /> },
   { path: '/agents', label: '智能体', icon: <Bot className="w-5 h-5" /> },
   { path: '/tasks', label: '任务', icon: <List className="w-5 h-5" /> },
-  { path: '/video-search', label: '教材视频', icon: <BookOpen className="w-5 h-5" />, highlight: true },
+  { path: '/classroom', label: '求职课堂', icon: <GraduationCap className="w-5 h-5" />, highlight: true },
+  { path: '/video-search', label: '教材视频', icon: <BookOpen className="w-5 h-5" /> },
   { path: '/create', label: '创作工坊', icon: <Wand2 className="w-5 h-5" /> },
   { path: '/create-task', label: '发布', icon: <PlusCircle className="w-5 h-5" /> },
 ];
@@ -22,8 +23,8 @@ const navItems: NavItem[] = [
 const bottomNavItems: NavItem[] = [
   { path: '/agents', label: '智能体', icon: <Bot className="w-6 h-6" /> },
   { path: '/tasks', label: '任务', icon: <List className="w-6 h-6" /> },
-  { path: '/video-search', label: '教材视频', icon: <BookOpen className="w-6 h-6" />, highlight: true },
-  { path: '/create', label: '创作', icon: <Wand2 className="w-6 h-6" />, highlight: true },
+  { path: '/classroom', label: '求职课堂', icon: <GraduationCap className="w-6 h-6" />, highlight: true },
+  { path: '/video-search', label: '教材视频', icon: <BookOpen className="w-6 h-6" /> },
   { path: '/transactions', label: '记录', icon: <History className="w-6 h-6" /> },
 ];
 
@@ -33,18 +34,15 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [currentUser] = useState({ id: 1, username: 'alice' });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // 移动端菜单关闭
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* 顶部导航栏 */}
       <header className="bg-white/80 backdrop-blur-lg border-b border-slate-200/50 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform">
                 <Bot className="w-5 h-5 text-white" />
@@ -54,7 +52,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               </span>
             </Link>
 
-            {/* 导航菜单 - 桌面端 */}
             <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <Link
@@ -74,9 +71,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               ))}
             </nav>
 
-            {/* 用户信息 - 桌面端 */}
             <div className="hidden md:flex items-center gap-4">
-              {/* 注册入口 */}
               <Link
                 to="/register"
                 className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium shadow-lg shadow-pink-500/25 hover:shadow-xl hover:-translate-y-0.5 transition-all"
@@ -85,7 +80,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 注册送Token
               </Link>
 
-              {/* Token 余额 */}
               <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
                 <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
                   <Sparkles className="w-3 h-3 text-white" />
@@ -95,7 +89,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 </span>
               </div>
               
-              {/* 用户头像 */}
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
                   {currentUser.username[0].toUpperCase()}
@@ -104,7 +97,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               </div>
             </div>
 
-            {/* 移动端菜单按钮 */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
@@ -118,11 +110,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </div>
         </div>
 
-        {/* 移动端菜单 */}
         {mobileMenuOpen && (
           <div className="lg:hidden absolute left-0 right-0 top-full bg-white border-b border-slate-200 shadow-xl">
             <div className="px-4 py-4 space-y-2">
-              {/* Token 余额 - 移动端 */}
               <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
@@ -141,7 +131,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 </div>
               </div>
 
-              {/* 导航链接 */}
               {navItems.map((item) => (
                 <Link
                   key={item.path}
@@ -159,7 +148,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 </Link>
               ))}
 
-              {/* 注册入口 - 移动端 */}
               <Link
                 to="/register"
                 className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
@@ -172,7 +160,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         )}
       </header>
 
-      {/* 移动端底部导航 */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-t border-slate-200/50 z-50">
         <div className="flex justify-around py-2 px-1">
           {bottomNavItems.map((item) => (
@@ -210,12 +197,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         </div>
       </nav>
 
-      {/* 主内容区 */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-8">
         {children}
       </main>
 
-      {/* 底部留白 - 移动端 */}
       <div className="h-4 lg:hidden" />
     </div>
   );

@@ -20,6 +20,7 @@ import JoinPage from './pages/JoinPage';
 import AdminApplicationsPage from './pages/AdminApplicationsPage';
 import DeliveryDetailPage from './pages/DeliveryDetailPage';
 import AgentWorkspacePage from './pages/AgentWorkspacePage';
+import JobClassroomPage from './pages/JobClassroomPage';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/join" element={<JoinPage />} />
             <Route path="/admin/applications" element={<AdminApplicationsPage />} />
             <Route path="/delivery/:id" element={<DeliveryDetailPage />} />
+            <Route path="/classroom" element={<JobClassroomPage />} />
           </Routes>
         </Layout>
         <FeedbackButton />

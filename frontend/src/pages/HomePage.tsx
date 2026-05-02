@@ -209,8 +209,15 @@ export const HomePage: React.FC = () => {
               className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-2xl hover:bg-white/20 transition-all duration-300 font-semibold text-lg border border-white/20 hover:-translate-y-1"
             >
               <Sparkles className="w-5 h-5" />
-              看看AI能做什么
+              探索更多
             </button>
+            <Link
+              to="/classroom"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl hover:from-purple-400 hover:to-pink-400 transition-all duration-300 font-semibold text-lg shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:-translate-y-1"
+            >
+              <GraduationCap className="w-5 h-5" />
+              求职课堂
+            </Link>
           </div>
         </div>
 

@@ -722,36 +722,6 @@ export const VideoSearchPage: React.FC = () => {
         </div>
       </Card>
       
-      {/* 使用指南 */}
-      <Card className="!p-6 bg-gradient-to-r from-slate-50 to-slate-100">
-        <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-          📖 使用指南
-        </h2>
-        <div className="space-y-3 text-sm text-slate-700">
-          <div className="flex items-start gap-3 p-3 bg-white rounded-lg">
-            <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">1</span>
-            <div>
-              <h3 className="font-medium text-green-700">第一步：搜索知识点</h3>
-              <p className="text-slate-500">输入你想学的知识点，比如"初中物理-光的折射"，系统自动从B站匹配最相关的教学视频</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-3 bg-white rounded-lg">
-            <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">2</span>
-            <div>
-              <h3 className="font-medium text-blue-700">第二步：按环节筛选</h3>
-              <p className="text-slate-500">选择教学环节（导入/讲解/巩固/拓展）和你的学习类型（视觉型/听觉型），获取更精准的推荐</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-3 bg-white rounded-lg">
-            <span className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">3</span>
-            <div>
-              <h3 className="font-medium text-purple-700">第三步：智能体辅助</h3>
-              <p className="text-slate-500">如果搜索不到合适的视频，智能体会自动帮你搜索更多平台资源，甚至定制专属内容</p>
-            </div>
-          </div>
-        </div>
-      </Card>
-
       {/* 任务创建弹窗 */}
       <TaskModal
         isOpen={taskModal.isOpen}

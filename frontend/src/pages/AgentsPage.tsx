@@ -36,13 +36,32 @@ export const AgentsPage: React.FC = () => {
       data.forEach(agent => {
         const calcRating = ratingsMap[agent.id];
         if (calcRating) {
-          agent.avg_rating = calcRating.avg_rating || agent.avg_rating;
-          agent.rating_count = calcRating.count;
+          // 只有当有真实评分数据时（count > 0）才更新评分
+          // 没有真实评分的智能体，avg_rating 设为 0，不使用初始默认值
+          if (calcRating.count > 0) {
+            agent.avg_rating = calcRating.avg_rating;
+            agent.rating_count = calcRating.count;
+          } else {
+            agent.avg_rating = 0;
+            agent.rating_count = 0;
+          }
+        } else {
+          agent.avg_rating = 0;
+          agent.rating_count = 0;
         }
       });
-      // 排序
+      // 排序：有真实评分的排在前面（按评分降序），没有真实评分的按任务数排序
       const sorted = [...data].sort((a, b) => {
-        if (sortBy === 'rating') return (b.avg_rating || 0) - (a.avg_rating || 0);
+        const aHasRating = (a.rating_count || 0) > 0;
+        const bHasRating = (b.rating_count || 0) > 0;
+        
+        if (sortBy === 'rating') {
+          // 按评分排序：有真实评分的在前，没有的按任务数排序
+          if (aHasRating && !bHasRating) return -1;
+          if (!aHasRating && bHasRating) return 1;
+          if (aHasRating && bHasRating) return (b.avg_rating || 0) - (a.avg_rating || 0);
+          return (b.total_tasks || 0) - (a.total_tasks || 0);
+        }
         if (sortBy === 'tasks') return (b.total_tasks || 0) - (a.total_tasks || 0);
         return ((b.completed_tasks || 0) / (b.total_tasks || 1) * 100) - ((a.completed_tasks || 0) / (a.total_tasks || 1) * 100);
       });

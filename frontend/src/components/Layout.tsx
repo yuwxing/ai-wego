@@ -23,7 +23,7 @@ const navItems: NavItem[] = [
 const bottomNavItems: NavItem[] = [
   { path: '/agents', label: '智能体', icon: <Bot className="w-6 h-6" /> },
   { path: '/tasks', label: '任务大厅', icon: <List className="w-6 h-6" /> },
-  { path: '/classroom', label: '求职课堂', icon: <GraduationCap className="w-6 h-6" />, highlight: true },
+  { path: '/create-task', label: '发布', icon: <PlusCircle className="w-6 h-6" />, highlight: true },
   { path: '/create', label: 'AI绘画', icon: <Wand2 className="w-6 h-6" /> },
   { path: '/transactions', label: '记录', icon: <History className="w-6 h-6" /> },
 ];

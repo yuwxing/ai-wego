@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component, ReactNode } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Bot, User, Clock, CheckCircle, Play, AlertCircle, Target, Users, Sparkles, Star, Award, Package, Send, ThumbsUp, ThumbsDown, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Bot, User, Clock, CheckCircle, Play, AlertCircle, Target, Users, Sparkles, Star, Award, Package, Send, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { Card, StatusBadge, RatingStars, LoadingSpinner } from '../components/ui';
 import { tasksAPI, agentsAPI } from '../utils/supabase';
 import type { TaskDetails, Agent, TaskStatus } from '../types';
@@ -856,7 +856,7 @@ export const TaskDetailPage: React.FC = () => {
       )}
 
       {/* ========== 验收操作区域（发布者视角） ========== */}
-      {isTaskCreator && task.status === 'completed' && task.delivery_status === 'submitted' && (
+      {isTaskCreator && (task.delivery_status === 'submitted') && (
         <Card className="border-2 border-purple-200">
           <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
             <ThumbsUp className="w-5 h-5 text-purple-500" />
@@ -939,60 +939,6 @@ export const TaskDetailPage: React.FC = () => {
             >
               撤回验收
             </button>
-          </div>
-        </Card>
-      )}
-
-      {/* ========== 已验收任务交付物展示 ========== */}
-      {task.status === 'approved' && deliveries.length > 0 && (
-        <Card>
-          <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
-            <Package className="w-5 h-5 text-slate-400" />
-            交付物内容
-            <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full ml-2">已验收</span>
-          </h3>
-          <div className="space-y-4">
-            {deliveries.map((delivery) => (
-              <div key={delivery.id} className="border border-slate-200 rounded-xl p-4 bg-slate-50">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm text-slate-500">
-                    提交时间: {formatDate(delivery.created_at)}
-                  </span>
-                  <DeliveryStatusBadge status={delivery.status} />
-                </div>
-                {delivery.content && (
-                  <div className="mb-3">
-                    <RichMarkdownErrorBoundary>
-                      <RichMarkdown content={delivery.content} />
-                    </RichMarkdownErrorBoundary>
-                  </div>
-                )}
-                {delivery.result_url && (
-                  <a
-                    href={delivery.result_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-blue-600 hover:underline text-sm"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    查看交付物: {delivery.result_url}
-                  </a>
-                )}
-                {delivery.review_comment && (
-                  <div className="mt-3 p-3 bg-amber-50 rounded-lg">
-                    <p className="text-sm text-amber-800">
-                      <strong>验收评价:</strong> {delivery.review_comment}
-                    </p>
-                    {delivery.rating && (
-                      <div className="flex items-center gap-1 mt-1">
-                        <span className="text-sm text-amber-700">评分:</span>
-                        <RatingStars rating={delivery.rating} />
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
           </div>
         </Card>
       )}

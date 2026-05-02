@@ -204,30 +204,64 @@ const AgentWorkspacePage: React.FC = () => {
   const logsEndRef = useRef<HTMLDivElement>(null);
   const pollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
-  // 获取数据
+  // 获取数据（带完善的错误处理和null防御）
   const fetchData = async () => {
     try {
+      setLoading(true);
       const numTaskId = parseInt(taskId || '0');
-      if (!numTaskId) throw new Error('无效的任务ID');
-      
-      const [taskData, deliveriesData] = await Promise.all([
-        tasksAPI.getTask(numTaskId),
-        tasksAPI.getDeliveries(numTaskId),
-      ]);
-      
-      if (!taskData) throw new Error('任务不存在');
-      setTask(taskData);
-      setDeliveries(deliveriesData || []);
-      
-      if (taskData.matched_agent_id) {
-        const agentData = await agentsAPI.getAgent(taskData.matched_agent_id);
-        setAgent(agentData);
+      if (!numTaskId) {
+        throw new Error('无效的任务ID，请检查链接是否正确');
       }
       
-      setLogs(generateLogs(taskData, deliveriesData || []));
+      let taskData = null;
+      let deliveriesData: any[] = [];
+      
+      // 安全获取任务
+      try {
+        taskData = await tasksAPI.getTask(numTaskId);
+      } catch (err) {
+        console.error('获取任务详情失败:', err);
+        throw new Error('无法连接到服务器，请检查网络连接后重试');
+      }
+      
+      if (!taskData) {
+        throw new Error('任务不存在或已被删除');
+      }
+      
+      setTask(taskData);
+      
+      // 安全获取 deliveries
+      try {
+        deliveriesData = (await tasksAPI.getDeliveries(numTaskId)) || [];
+      } catch (err) {
+        console.warn('获取交付记录失败，使用空列表:', err);
+        deliveriesData = [];
+      }
+      setDeliveries(deliveriesData);
+      
+      // 安全获取 agent
+      if (taskData?.matched_agent_id) {
+        try {
+          const agentData = await agentsAPI.getAgent(taskData.matched_agent_id);
+          setAgent(agentData || null);
+        } catch (err) {
+          console.warn('获取智能体信息失败:', err);
+          setAgent(null);
+        }
+      }
+      
+      // 安全生成日志
+      try {
+        setLogs(generateLogs(taskData || {}, deliveriesData || []));
+      } catch (err) {
+        console.warn('生成日志失败:', err);
+        setLogs([]);
+      }
+      
       setError(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : '获取数据失败');
+      console.error('fetchData error:', err);
+      setError(err instanceof Error ? err.message : '加载失败，请稍后重试');
     } finally {
       setLoading(false);
     }

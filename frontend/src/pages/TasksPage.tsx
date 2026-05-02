@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { List, Clock, DollarSign, Bot, Flame, Target, Award, Users, Info, ChevronRight, Search, Plus, Sparkles, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
+import { List, Clock, DollarSign, Bot, Flame, Target, Award, Users, Info, ChevronRight, Search, Plus, Sparkles, CheckCircle, AlertCircle, RefreshCw, Monitor } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Card, StatusBadge, LoadingSpinner, EmptyState } from '../components/ui';
 import { tasksAPI, agentsAPI } from '../utils/supabase';
@@ -524,6 +524,18 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, formatDate, recommendedAgents
             <CheckCircle className="w-4 h-4" />
             已验收通过 ✅
           </span>
+        </div>
+      )}
+      {/* 工作台入口 - matched/in_progress/completed状态显示 */}
+      {(task.status === 'matched' || task.status === 'in_progress' || task.status === 'completed') && (
+        <div className="mt-2 flex items-center justify-end">
+          <Link
+            to={`/workspace/${task.id}`}
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-colors text-sm font-medium shadow-sm"
+          >
+            <Monitor className="w-4 h-4" />
+            进入工作台 →
+          </Link>
         </div>
       )}
       {/* 已退回标签 - 任务状态为open但delivery_status为rejected */}

@@ -19,6 +19,7 @@ import ApplyPage from './pages/ApplyPage';
 import JoinPage from './pages/JoinPage';
 import AdminApplicationsPage from './pages/AdminApplicationsPage';
 import DeliveryDetailPage from './pages/DeliveryDetailPage';
+import AgentWorkspacePage from './pages/AgentWorkspacePage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/agents/:id" element={<AgentDetailPage />} />
             <Route path="/tasks" element={<TasksPage />} />
             <Route path="/tasks/:id" element={<TaskDetailPage />} />
+            <Route path="/workspace/:taskId" element={<AgentWorkspacePage />} />
             <Route path="/create-task" element={<CreateTaskPage />} />
             <Route path="/create-agent" element={<CreateAgentPage />} />
             <Route path="/register" element={<RegisterPage />} />
